@@ -23,22 +23,27 @@ const { Alert, Card, Button, Table } = ReactBootstrap;
 
 
 class App extends React.Component {
+  stdprogram = (
+    <div className="std-program">
+      <button type="button" class="btn btn-primary btn-lg" onClick={() => this.handleCheckAttendanceClick()}>เช็คชื่อ</button>
+      <br/>
+      <button type="button" class="btn btn-secondary btn-lg">ถาม - ตอบ</button>
+    </div>
+  );
 
   state = {
     scene: 0,
-    // add students
     students: [],
-    // add table
     stdid: "",
     stdtitle: "",
     stdfname: "",
     stdlname: "",
     stdemail: "",
     stdphone: "",
-    // auth
-    user: null,  // เพิ่มตัวแปร user=null คือยังไม่ login
+    user: null,
     ustudent: null,
   }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -48,17 +53,48 @@ class App extends React.Component {
       }
     });
   }
+
   render() {
-    // var stext = JSON.stringify(this.state.students);  
-    // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
     if (this.state.user) {
-      return (
-        <div>
-          <h1>Welcome, {this.state.user.displayName}</h1>
-          <p>Email: {this.state.user.email}</p>
-          <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
-        </div>
-      );
+      if (this.state.scene === 1) {
+        return (
+          <div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
+              <div className="container">
+                <a className="navbar-brand" href="#">
+                  <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
+                </a>
+                <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
+              </div>
+            </nav>
+            <div className="std-containner">
+              <h1>Welcome, {this.state.user.displayName}</h1>
+              <br/>
+              <h5>Email: {this.state.user.email}</h5>
+              {/* Add content for check attendance page */}
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
+              <div className="container">
+                <a className="navbar-brand" href="#">
+                  <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
+                </a>
+                <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
+              </div>
+            </nav>
+            <div className="std-containner">
+              <h1>Welcome, {this.state.user.displayName}</h1>
+              <br/>
+              <h5>Email: {this.state.user.email}</h5>
+              {this.stdprogram}
+            </div>
+          </div>
+        );
+      }
     } else {
       return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
@@ -74,30 +110,32 @@ class App extends React.Component {
         </nav>
       );
     }
-
   }
 
-
-
-  // google login logout
   google_login() {
-    // Using a popup.
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("profile");
     provider.addScope("email");
     firebase.auth().signInWithPopup(provider);
   }
+
   google_logout() {
     if (confirm("Are you sure?")) {
       firebase.auth().signOut();
     }
   }
 
-
-
+  handleCheckAttendanceClick() {
+    // Change scene to 1 when check attendance button is clicked
+    this.setState({ scene: 1 });
+    return(
+      <div>
+        <p>เช็คชื่อ</p>
+      </div>
+    );
+  }
 
 }
-
 
 const container = document.getElementById("myapp");
 const root = ReactDOM.createRoot(container);
