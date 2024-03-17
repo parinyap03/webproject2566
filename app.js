@@ -72,7 +72,7 @@ class App extends React.Component {
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
               <div className="container">
-                <a className="navbar-brand" href="index1.html">
+                <a className="navbar-brand" href="index.html">
                   <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
                 </a>
                 <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
@@ -92,7 +92,7 @@ class App extends React.Component {
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
               <div className="container">
-                <a className="navbar-brand" href="index1.html">
+                <a className="navbar-brand" href="index.html">
                   <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
                 </a>
                 <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
@@ -111,7 +111,7 @@ class App extends React.Component {
       return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
           <div className="container">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand">
               <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
             </a>
             <button onClick={() => this.google_login()} className="btn btn-outline-dark">
