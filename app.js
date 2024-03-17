@@ -32,8 +32,11 @@ class App extends React.Component {
   );
 
   stdcheck = (
-    <div>
-      <p>เช็คชื่อ</p>
+    <div className="stdcheck">
+      <h5>เช็คชื่อ นักศึกษา :</h5>
+      <input type="text" class="form-control" placeholder="Code" aria-label="Username" ></input>
+      <br/>
+      <button className="btn btn-primary" type="button">Submit</button>
     </div>
   );
 
@@ -69,7 +72,7 @@ class App extends React.Component {
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
               <div className="container">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="index1.html">
                   <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
                 </a>
                 <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
@@ -89,7 +92,7 @@ class App extends React.Component {
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm container-fluid">
               <div className="container">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="index1.html">
                   <strong className="h6 mb-0 font-weight-bold text-uppercase">Study</strong>
                 </a>
                 <button onClick={() => this.google_logout()} className="btn btn-outline-dark">Logout</button>
@@ -139,6 +142,20 @@ class App extends React.Component {
     // Also set showMessage state to true to display the message
     this.setState({ scene: 1, showMessage: true });
   }
+}
+// end class App
+
+// text input
+function TextInput({label,app,value,style}){
+  return <label className="form-label">
+  {label}:    
+   <input className="form-control" style={style}
+   value={app.state[value]} onChange={(ev)=>{
+       var s={};
+       s[value]=ev.target.value;
+       app.setState(s)}
+   }></input>
+ </label>;  
 }
 
 const container = document.getElementById("myapp");
