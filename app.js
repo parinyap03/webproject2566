@@ -25,9 +25,15 @@ const { Alert, Card, Button, Table } = ReactBootstrap;
 class App extends React.Component {
   stdprogram = (
     <div className="std-program">
-      <button type="button" class="btn btn-primary btn-lg" onClick={() => this.handleCheckAttendanceClick()}>เช็คชื่อ</button>
+      <button type="button" className="btn btn-primary btn-lg" onClick={() => this.handleCheckAttendanceClick()}>เช็คชื่อ</button>
       <br/>
-      <button type="button" class="btn btn-secondary btn-lg">ถาม - ตอบ</button>
+      <button type="button" className="btn btn-secondary btn-lg">ถาม - ตอบ</button>
+    </div>
+  );
+
+  stdcheck = (
+    <div>
+      <p>เช็คชื่อ</p>
     </div>
   );
 
@@ -42,6 +48,8 @@ class App extends React.Component {
     stdphone: "",
     user: null,
     ustudent: null,
+    // Add a state for displaying the message
+    showMessage: false
   }
 
   componentDidMount() {
@@ -71,7 +79,8 @@ class App extends React.Component {
               <h1>Welcome, {this.state.user.displayName}</h1>
               <br/>
               <h5>Email: {this.state.user.email}</h5>
-              {/* Add content for check attendance page */}
+              {/* Render the message if showMessage is true */}
+              {this.state.showMessage && this.stdcheck}
             </div>
           </div>
         );
@@ -127,14 +136,9 @@ class App extends React.Component {
 
   handleCheckAttendanceClick() {
     // Change scene to 1 when check attendance button is clicked
-    this.setState({ scene: 1 });
-    return(
-      <div>
-        <p>เช็คชื่อ</p>
-      </div>
-    );
+    // Also set showMessage state to true to display the message
+    this.setState({ scene: 1, showMessage: true });
   }
-
 }
 
 const container = document.getElementById("myapp");
